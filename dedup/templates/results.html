@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeDup Test Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Results</span>
+            <a class="btn btn-primary" href='http://192.168.2.251:8000/test'>back</a>
+        </div>
+    </nav>
+</header>
+
+<h2>Adjudication Records</h2>
+
+
+
+<h4>Submitted Data</h4>
+<table class="table table-sm">
+    <tbody>
+        <tr scope="col">
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>Gender</strong></td>
+            <td><strong>Date of Birth</strong></td>
+            <td><strong>Email</strong></td>
+            <td><strong>Address</strong></td>
+        </tr>
+        <tr scope="col">
+            <td>{{ form_data.first_name }}</td>
+            <td>{{ form_data.last_name }}</td>
+            <td>{{ form_data.gender }}</td>
+            <td>{{ form_data.dob }}</td>
+            <td>{{ form_data.email }}</td>
+            <td>{{ form_data.address }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h4>Duplciate records for review </h4>
+<table class="table table-sm">
+    <thead>
+       <tr scope="col">
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>Gender</strong></td>
+            <td><strong>Date of Birth</strong></td>
+            <td><strong>Email</strong></td>
+            <td><strong>Address</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for duplicate in duplicates %}
+        <tr>
+            <td>{{ duplicate.record.first_name }} ({{ duplicate.similarity_percentage[0] }}%)</td>
+            <td>{{ duplicate.record.last_name }} ({{ duplicate.similarity_percentage[1] }}%)</td>
+            <td>{{ duplicate.record.gender }} ({{ duplicate.similarity_percentage[2] }}%)</td>
+            <td>{{ duplicate.record.dob }} ({{ duplicate.similarity_percentage[3] }}%)</td>
+            <td>{{ duplicate.record.email }} ({{ duplicate.similarity_percentage[4] }}%)</td>
+            <td>{{ duplicate.record.address }} ({{ duplicate.similarity_percentage[5] }}%)</td>
+        </tr>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
